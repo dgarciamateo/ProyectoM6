@@ -1,0 +1,19 @@
+DADES TEMPORALSUsuario: David
+---------------------------------
+Nombre: dsfsdf
+Primer apellido: ssdfd
+Segundo apellido: esfdsd
+Direccion:dwd
+Correo electronico: fe@hotmail.com
+Genero: Mujer
+Fecha de nacimiento: 07/11/2018
+---------------------------------
+Modelo: Seat Alhambra
+---------------------------------
+Caracteristicas del modelo: SEAT Alhambra Jklow- 160CV - 5 puertas - Diesel - 22341€
+---------------------------------
+Accesorios:
+Reposapies y pedales deportivos
+GPS integrado
+Aumento en el precio:0
+---------------------------------
