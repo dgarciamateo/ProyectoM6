@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xml_config>
+	<version>1.0</version>
+	<car_configuration_path>sdfe</car_configuration_path>
+
+	<car_configuration_file_name>wdwad</car_configuration_file_name>
+
+	<employee_list> 
+		<user>David</user>
+		<user>Ali</user>
+		<user>Darius</user>
+	</employee_list>
+
+	<employee_password> 
+		<password>123</password>
+		<password>456</password>
+		<password>789</password>
+	</employee_password>
+
+	<employee_version>true</employee_version>
+
+	<specifications_file_path>dydo</specifications_file_path>
+</xml_config>

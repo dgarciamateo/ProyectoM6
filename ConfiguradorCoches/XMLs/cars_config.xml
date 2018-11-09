@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<xml_cars_config>
+	<models>
+		<model>
+			<id>M01</id>
+			<name>SEAT Alhambra</name>
+			<descript>El monovolumen SEAT Alhambra ha sido diseñado para sobresalir entre los vehículos de su categoría. La capacidad de un coche 7 plazas y la energía familiar que desprende ya a primera vista, no son las únicas bazas que te ofrece un coche familiar tan completo.</descript>
+			<image_name>alambra.jpg</image_name>
+			<price>15000</price>
+
+		</model>
+
+		<model>
+			<id>M02</id>
+			<name>SEAT Ibiza</name>
+			<descript>El acabado Reference Plus tiene todo lo que necesitas y no le sobra nada. Ha llegado el momento de poseer la  carretera, con estilo Ibiza.</descript>
+			<image_name>ibiza.png</image_name>
+			<price>13000</price>
+		</model>
+
+		<model>
+			<id>M03</id>
+			<name>SEAT Leon</name>
+			<descript>El SEAT León viene equipado con toda la tecnología para que cada momento resulte de lo más agradable. Prestaciones como el Cargador inalámbrico y la Asistencia al aparcamiento te ayudarán a hacer que cualquier trayecto sea tranquilo y sin alteraciones.</descript>
+			<image_name>leon.png</image_name>
+			<price>14000</price>
+		</model>
+
+		<model>
+			<id>M04</id>
+			<name>SEAT Toledo</name>
+			<descript>SI ESTÁS BUSCANDO AÚN MÁS LUJO Y CONFORT, desde el SEAT Toledo, el acabado Xcellence dispone del Sistema de apertura y arranque sin llave (KESSY) para ayudar al conductor disfrutar sin esfuerzo. </descript>
+			<image_name>toledo.png</image_name>
+			<price>18000</price>
+		</model>
+
+		<model>
+			<id>M05</id>
+			<name>SEAT Mii</name>
+			<descript>Con la tecnología TGI ahorrarás en combustible, podrás recorrer muchos más kilómetros sin repostar y gracias a sus bajas emisiones tendrás clasificación ECO. Piensa en ti y cuidarás el medio ambiente.</descript>
+			<image_name>mii.png</image_name>
+			<price>10000</price>
+		</model>
+	</models>
+
+	<engines>
+		<engine>
+			<id>E01</id>
+			<name>Diesel</name>
+			<descript>El motor diésel es un motor térmico que tiene combustión interna alternativa que se produce por la auto-ignición del combustible debido a altas temperaturas derivadas de la alta relación de compresión que posee, según el principio del ciclo Diesel.</descript>
+			<image_name></image_name>
+			<price>3000</price>			
+		</engine>
+
+		<engine>
+			<id>E02</id>
+			<name>Electrico</name>
+			<descript>El motor eléctrico es un dispositivo que convierte la energía eléctrica en energía mecánica por medio de la acción de los campos magnéticos generados en sus bobinas.</descript>
+			<image_name></image_name>
+			<price>5000</price>			
+		</engine>
+	</engines>
+
+	<accesories>
+		<accesory>
+			<id>A01</id>
+			<name>Baul portaequipajes</name>
+			<descript></descript>
+			<image_name></image_name>
+			<price>200</price>	
+			<model_available>SEAT Alhambra TJ34,SEAT Alhambra 15008,SEAT Ibiza TYU,SEAT Ibiza 56Y,SEAT Toledo KILL,SEAT Toledo FG56,SEAT Toledo BN8,SEAT Mii CASA</model_available>
+		</accesory>
+
+		<accesory>
+			<id>A02</id>
+			<name>Reposapies y pedales deportivos</name>
+			<descript>Pedales de aluminio de diseño deportivo y goma negra antideslizante para mejorar el agarre y disfrutar de una experiencia de conducción deportiva.</descript>
+			<image_name></image_name>
+			<price>400</price>	
+			<model_available>SEAT Alhambra Jklow,SEAT Alhambra 15008,SEAT Ibiza TYU,SEAT Ibiza 56Y,SEAT Ibiza TRE23,SEAT Leon 54RF,SEAT Leon JHU,SEAT Toledo FG56,SEAT Toledo BN8</model_available>
+		</accesory>
+
+		<accesory>
+			<id>A03</id>
+			<name>Portavasos</name>
+			<descript>Ranuras para poner vasos comodamente.</descript>
+			<image_name></image_name>
+			<price>100</price>	
+			<model_available> SEAT Alhambra TJ34,SEAT Alhambra Jklow,SEAT Alhambra 15008,SEAT Ibiza TYU,SEAT Ibiza 56Y,SEAT Ibiza TRE23,SEAT Leon 54RF,SEAT Leon JHU,SEAT Toledo KILL,SEAT Toledo FG56,SEAT Toledo BN8 ,SEAT Mii CASA,SEAT Mii WII</model_available>
+		</accesory>
+
+		<accesory>
+			<id>A04</id>
+			<name>Almacenamiento extra</name>
+			<descript>Mas cajones donde poder almacenar diferentes cosas si es necesario.</descript>
+			<image_name></image_name>
+			<price>1000</price>	
+			<model_available>SEAT Alhambra TJ34,SEAT Alhambra Jklow,SEAT Ibiza TYU,SEAT Ibiza 56Y,SEAT Toledo KILL,SEAT Toledo FG56,SEAT Toledo BN8</model_available>
+		</accesory>
+
+		<accesory>
+			<id>A05</id>
+			<name>Cortinillas solares</name>
+			<descript>Cortinas laterales para proteger en los dias mas soleados.</descript>
+			<image_name></image_name>
+			<price>400</price>	
+			<model_available>SEAT Ibiza TYU,SEAT Ibiza 56Y,SEAT Ibiza TRE23,SEAT Leon 54RF,SEAT Leon JHU,SEAT Toledo KILL,SEAT Toledo FG56,SEAT Mii WII</model_available>
+		</accesory>
+
+		<accesory>
+			<id>A06</id>
+			<name>GPS integrado</name>
+			<descript>GPS con mapa de alta calidad incluido en la pantalla del vehiculo.</descript>
+			<image_name></image_name>
+			<price>1200</price>	
+			<model_available>SEAT Alhambra TJ34,SEAT Alhambra Jklow,SEAT Ibiza TYU,SEAT Ibiza 56Y,SEAT Ibiza TRE23,SEAT Leon 54RF,SEAT Leon JHU,SEAT Toledo KILL,SEAT Toledo FG56,SEAT Mii WII</model_available>
+		</accesory>
+	</accesories>
+
+	<submodels>
+		<submodel>
+			<model_id>M01</model_id>
+			<sm_id>SM01</sm_id>
+			<name>SEAT Alhambra TJ34</name>
+			<cv>150CV</cv>
+			<doors>5 puertas</doors>
+			<engine>Gasolina</engine>
+			<price>21324</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M01</model_id>
+			<sm_id>SM02</sm_id>
+			<name>SEAT Alhambra Jklow</name>
+			<cv>160CV</cv>
+			<doors>5 puertas</doors>
+			<engine>Diesel</engine>
+			<price>22341</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M01</model_id>
+			<sm_id>SM03</sm_id>
+			<name>SEAT Alhambra 15008</name>
+			<cv>200CV</cv>
+			<doors>5 puertas</doors>
+			<engine>Electrico</engine>
+			<price>34567</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M02</model_id>
+			<sm_id>SM04</sm_id>
+			<name>SEAT Ibiza TYU</name>
+			<cv>100CV</cv>
+			<doors>3 puertas</doors>
+			<engine>Diesel</engine>
+			<price>18981</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M02</model_id>
+			<sm_id>SM05</sm_id>
+			<name>SEAT Ibiza 56Y</name>
+			<cv>150CV</cv>
+			<doors>5 puertas</doors>
+			<engine>Gasolina</engine>
+			<price>12345</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M02</model_id>
+			<sm_id>SM06</sm_id>
+			<name>SEAT Ibiza TRE23</name>
+			<cv>160CV</cv>
+			<doors>3 puertas</doors>
+			<engine>Gasolina</engine>
+			<price>20998</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M03</model_id>
+			<sm_id>SM07</sm_id>
+			<name>SEAT Leon 54RF</name>
+			<cv>300CV</cv>
+			<doors>5 puertas</doors>
+			<engine>Electrico</engine>
+			<price>30098</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M03</model_id>
+			<sm_id>SM08</sm_id>
+			<name>SEAT Leon JHU</name>
+			<cv>159CV</cv>
+			<doors>5 puertas</doors>
+			<engine>Diesel</engine>
+			<price>13245</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M04</model_id>
+			<sm_id>SM09</sm_id>
+			<name>SEAT Toledo KILL</name>
+			<cv>400CV</cv>
+			<doors>5 puertas</doors>
+			<engine>Gasolina</engine>
+			<price>32322</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M04</model_id>
+			<sm_id>SM10</sm_id>
+			<name>SEAT Toledo FG56</name>
+			<cv>200CV</cv>
+			<doors>3 puertas</doors>
+			<engine>Diesel</engine>
+			<price>19334</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M04</model_id>
+			<sm_id>SM11</sm_id>
+			<name>SEAT Toledo BN8 </name>
+			<cv>150CV</cv>
+			<doors>5 puertas</doors>
+			<engine>Electrico</engine>
+			<price>26617</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M05</model_id>
+			<sm_id>SM12</sm_id>
+			<name>SEAT Mii CASA</name>
+			<cv>158CV</cv>
+			<doors>5 puertas</doors>
+			<engine>Gasolina</engine>
+			<price>23421</price>
+		</submodel>
+
+		<submodel>
+			<model_id>M05</model_id>
+			<sm_id>SM13</sm_id>
+			<name>SEAT Mii WII</name>
+			<cv>300CV</cv>
+			<doors>3 puertas</doors>
+			<engine>Diesel</engine>
+			<price>25636</price>
+		</submodel>
+	</submodels>
+</xml_cars_config>
