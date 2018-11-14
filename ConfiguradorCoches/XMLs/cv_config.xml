@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
 <xml_config>
 	<version>1.0</version>
-	<car_configuration_path>sdfe</car_configuration_path>
+	<lenguage>es,ca,en</lenguage>
+	<lenguage_default>es</lenguage_default>
+	<postfix_lenguage_file_name>_cv.lenguage.txt</postfix_lenguage_file_name>
+	
+	<car_configuration_path>..\..\..\..\XMLs</car_configuration_path>
 
-	<car_configuration_file_name>wdwad</car_configuration_file_name>
+	<car_configuration_file_name>cars_config.xml</car_configuration_file_name>
 
 	<employee_list> 
 		<user>David</user>
@@ -17,7 +21,7 @@
 		<password>789</password>
 	</employee_password>
 
-	<employee_version>true</employee_version>
+	<discount>18</discount>
 
 	<specifications_file_path>dydo</specifications_file_path>
 </xml_config>

@@ -14,17 +14,21 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class Read_XMLConfig {
-	
+	private static String version_p;
 	private static String car_conf_path;
 	private static String car_conf_f_name;
 	private static String specif_f_path;
-	private static boolean emp_version;
-	private static String version_p;
+	private static String lenguage_def;
+	private static String lenguage_f_name;
+	private static String lenguagesString;
 	private static String[] users = null;
 	private static String[] pass = null;
+	private static String[] lenguages = null;
+	private static int discount;
+	private static String discountString;
 	 
 	 
-	public static XMLConfig leer() {
+	public XMLConfig leer() {
 	XMLConfig conf = new XMLConfig();
 
 	try {
@@ -55,8 +59,23 @@ public class Read_XMLConfig {
 				specif_f_path = ((Element) eElement).getElementsByTagName("specifications_file_path").item(0)
 						.getTextContent();
 
-				emp_version = ((Element) eElement).getElementsByTagName("employee_version").item(0)
-						.getTextContent().equalsIgnoreCase("true");
+				lenguagesString = ((Element) eElement).getElementsByTagName("lenguage").item(0)
+						.getTextContent();
+				
+				
+				lenguages = lenguagesString.split(",");
+				
+				lenguage_def = ((Element) eElement).getElementsByTagName("lenguage_default").item(0)
+						.getTextContent();
+				
+				lenguage_f_name = ((Element) eElement).getElementsByTagName("postfix_lenguage_file_name").item(0)
+						.getTextContent();
+				
+				
+				discountString = ((Element) eElement).getElementsByTagName("discount").item(0)
+						.getTextContent();
+				
+				discount = Integer.parseInt(discountString);
 				
 				NodeList nList2 = ((Document) doc).getElementsByTagName("user");
 				users = new String[nList2.getLength()];
@@ -92,7 +111,7 @@ public class Read_XMLConfig {
 
 				}
 				
-				conf = new XMLConfig(car_conf_path, car_conf_f_name, specif_f_path, version_p, users, pass, emp_version);
+				conf = new XMLConfig(car_conf_path, car_conf_f_name, specif_f_path, version_p, lenguage_def, lenguage_f_name, users, pass, lenguages, discount);
 
 			}
 		}
@@ -129,6 +148,6 @@ public class Read_XMLConfig {
 	}
 	 
 	public static void main(String[] args) {
-	leer();
+	
 	}
 }

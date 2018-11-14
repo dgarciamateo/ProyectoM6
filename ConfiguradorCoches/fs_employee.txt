@@ -1,19 +1,31 @@
 DADES TEMPORALSUsuario: David
 ---------------------------------
-Nombre: dsfsdf
-Primer apellido: ssdfd
-Segundo apellido: esfdsd
-Direccion:dwd
-Correo electronico: fe@hotmail.com
+Nombre: Miriam
+Primer apellido: Honrubia
+Segundo apellido: Gil
+Direccion:Consell de seny
+Correo electronico: sapito@gmail.com
 Genero: Mujer
-Fecha de nacimiento: 07/11/2018
+Fecha de nacimiento: 06/09/2018
+---------------------------------
+Modelo: Seat Mii
+---------------------------------
+Caracteristicas del modelo: SEAT Mii CASA- 158CV - 5 puertas - Gasolina - 23421€
+---------------------------------
+Accesorios:
+Baul portaequipajes
+Portavasos
+Aumento en el precio:0
+---------------------------------
+Modelo: Seat Alhambra
+---------------------------------
+Caracteristicas del modelo: SEAT Alhambra 15008- 200CV - 5 puertas - Electrico - 34567€
+---------------------------------
+Modelo: Seat Alhambra
+---------------------------------
+Caracteristicas del modelo: SEAT Alhambra TJ34- 150CV - 5 puertas - Gasolina - 21324€
 ---------------------------------
 Modelo: Seat Alhambra
 ---------------------------------
 Caracteristicas del modelo: SEAT Alhambra Jklow- 160CV - 5 puertas - Diesel - 22341€
----------------------------------
-Accesorios:
-Reposapies y pedales deportivos
-GPS integrado
-Aumento en el precio:0
 ---------------------------------

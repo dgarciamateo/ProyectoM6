@@ -1,11 +1,8 @@
 package Ventanas;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.ButtonGroup;
@@ -15,13 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -74,6 +72,7 @@ public class Form_DatosClientes extends JFrame {
 
 	public Form_DatosClientes() {
 		setTitle("Concesionario Esteve");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/et.png"));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 428, 551);
@@ -138,6 +137,19 @@ public class Form_DatosClientes extends JFrame {
 
 			}
 		});
+
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				int confirmed = JOptionPane.showConfirmDialog(null, "Desea salir sin guardar los datos ?",
+						"Confirmar salir", JOptionPane.YES_NO_OPTION);
+
+				if (confirmed == JOptionPane.YES_OPTION) {
+					dispose();
+				} else {
+					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+				}
+			}
+		});
 		JButton btnSiguiente = new JButton("SIGUIENTE");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -148,6 +160,7 @@ public class Form_DatosClientes extends JFrame {
 							JOptionPane.WARNING_MESSAGE);
 				} else {
 					if (comrpobarEmail(txtCorreo.getText()) == true) {
+						// txt
 						File file = new File("fs_employee.txt");
 						if (file.exists()) {
 							FileWriter fw;
@@ -156,24 +169,26 @@ public class Form_DatosClientes extends JFrame {
 								fw = new FileWriter(file.getAbsoluteFile(), true);
 								bw = new BufferedWriter(fw);
 								PrintWriter pwr = new PrintWriter(bw);
-								pwr.write("\r\nNombre: " + txtNombre.getText());
-								pwr.write("\r\nPrimer apellido: " + txtApellido.getText());
-								pwr.write("\r\nSegundo apellido: " + txtApellido2.getText());
-								pwr.write("\r\nDireccion:" + txtDireccion.getText());
-								pwr.write("\r\nCorreo electronico: " + txtCorreo.getText());
+								pwr.write("DATOS CLIENTE - Nombre: " + txtNombre.getText() + " --- "
+										+ "Primer apellido: " + txtApellido.getText() + " --- " + "Segundo apellido: "
+										+ txtApellido2.getText() + " --- " + "Direccion: " + txtDireccion.getText()
+										+ " --- " + "Correo electronico: " + txtCorreo.getText());
 								if (rbHombre.isSelected()) {
-									pwr.write("\r\nGenero: " + rbHombre.getText());
+									pwr.write(" --- " + "Genero: " + rbHombre.getText() + " --- ");
 								} else if (rbMujer.isSelected()) {
-									pwr.write("\r\nGenero: " + rbMujer.getText());
+									pwr.write(" --- " + "Genero: " + rbMujer.getText() + " --- ");
 								} else {
-									pwr.write("\r\nGenero: " + rbNo.getText());
+									pwr.write(" --- " + "Genero: " + rbNo.getText() + " --- ");
 								}
-								dateChooser.setDateFormatString("dd/MM/yyyy");
-								SimpleDateFormat geekonjavadate = new SimpleDateFormat("dd/MM/yyyy",
-										Locale.getDefault());
-								String gojdate = geekonjavadate.format(dateChooser.getDate());
-								pwr.write("\r\nFecha de nacimiento: " + gojdate);
-								pwr.write("\r\n---------------------------------");
+
+								try {
+									SimpleDateFormat geekonjavadate = new SimpleDateFormat("dd/MM/yyyy",
+											Locale.getDefault());
+									String gojdate = geekonjavadate.format(dateChooser.getDate());
+									pwr.write("Fecha de nacimiento: " + gojdate + "\r\n");
+								} catch (Exception e) {
+									pwr.write("Fecha de nacimiento: \r\n");
+								}
 								pwr.close();
 								bw.close();
 							} catch (IOException e1) {
@@ -181,7 +196,8 @@ public class Form_DatosClientes extends JFrame {
 								e1.printStackTrace();
 							}
 						}
-						Form_ModeloCoche fmc = new Form_ModeloCoche();
+
+						Form_Coches fmc = new Form_Coches();
 						fmc.run();
 					} else {
 						JOptionPane.showMessageDialog(null, "El email ingresado es inválido.", "Error",
@@ -191,110 +207,95 @@ public class Form_DatosClientes extends JFrame {
 				}
 			}
 		});
-		
+
 		txtNombre = new JTextField();
+		txtNombre.setText("Pepe");
 		txtNombre.setColumns(10);
-		
+
 		txtApellido = new JTextField();
+		txtApellido.setText("Rodriguez");
 		txtApellido.setColumns(10);
-		
+
 		txtApellido2 = new JTextField();
+		txtApellido2.setText("Gomez");
 		txtApellido2.setColumns(10);
-		
+
 		txtDireccion = new JTextField();
+		txtDireccion.setText("Calle Falsa 123");
 		txtDireccion.setColumns(10);
-		
+
 		txtCorreo = new JTextField();
+		txtCorreo.setText("pepe@gmail.com");
 		txtCorreo.setColumns(10);
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(52)
-					.addComponent(lblNewLabel)
-					.addPreferredGap(ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-					.addComponent(lblUsuario)
-					.addGap(77))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblNewLabel_4)
-							.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-							.addComponent(rbHombre)
-							.addGap(18)
-							.addComponent(rbMujer)
-							.addGap(18)
-							.addComponent(rbNo))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblPrimerApellido)
-								.addComponent(lblNewLabel_1)
-								.addComponent(lblNewLabel_2)
-								.addComponent(lblNewLabel_3)
-								.addComponent(lblFechaDeNacimiento)
-								.addComponent(lblSegundoApellido, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE))
-							.addGap(40)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(txtNombre, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-								.addComponent(txtApellido)
-								.addComponent(txtApellido2)
-								.addComponent(txtDireccion)
-								.addComponent(txtCorreo)
-								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)))
-					.addContainerGap(42, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnGuardar, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-					.addGap(99)
-					.addComponent(btnSiguiente, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel)
-						.addComponent(lblUsuario))
-					.addGap(28)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_1)
-						.addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPrimerApellido)
-						.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSegundoApellido)
-						.addComponent(txtApellido2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_2)
-						.addComponent(txtDireccion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(12)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_3)
-						.addComponent(txtCorreo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_4)
-						.addComponent(rbNo)
-						.addComponent(rbMujer)
-						.addComponent(rbHombre))
-					.addGap(20)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblFechaDeNacimiento)
-						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnGuardar)
-						.addComponent(btnSiguiente))
-					.addContainerGap())
-		);
+				gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane.createSequentialGroup()
+						.addGap(52).addComponent(lblNewLabel).addPreferredGap(ComponentPlacement.RELATED, 113,
+								Short.MAX_VALUE)
+						.addComponent(lblUsuario).addGap(77))
+						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap().addGroup(gl_contentPane
+								.createParallelGroup(Alignment.LEADING)
+								.addGroup(
+										gl_contentPane.createSequentialGroup().addComponent(lblNewLabel_4)
+												.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+												.addComponent(rbHombre).addGap(18).addComponent(rbMujer).addGap(18)
+												.addComponent(rbNo))
+								.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
+										.createParallelGroup(Alignment.LEADING).addComponent(lblPrimerApellido)
+										.addComponent(lblNewLabel_1).addComponent(lblNewLabel_2)
+										.addComponent(lblNewLabel_3).addComponent(lblFechaDeNacimiento)
+										.addComponent(lblSegundoApellido, GroupLayout.PREFERRED_SIZE, 112,
+												GroupLayout.PREFERRED_SIZE))
+										.addGap(40)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(txtNombre, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+												.addComponent(txtApellido).addComponent(txtApellido2)
+												.addComponent(txtDireccion).addComponent(txtCorreo)
+												.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 186,
+														GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)))
+								.addContainerGap(42, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+								.addComponent(btnGuardar, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE).addGap(99)
+								.addComponent(btnSiguiente, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+								.addContainerGap()));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel)
+								.addComponent(lblUsuario))
+						.addGap(28)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_1)
+								.addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblPrimerApellido)
+								.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblSegundoApellido).addComponent(txtApellido2, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_2)
+								.addComponent(txtDireccion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addGap(12)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel_3).addComponent(txtCorreo, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_4)
+								.addComponent(rbNo).addComponent(rbMujer).addComponent(rbHombre))
+						.addGap(20)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblFechaDeNacimiento).addComponent(dateChooser,
+										GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnGuardar)
+								.addComponent(btnSiguiente))
+						.addContainerGap()));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

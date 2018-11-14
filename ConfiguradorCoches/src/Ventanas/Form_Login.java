@@ -1,7 +1,4 @@
 package Ventanas;
- 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,12 +18,15 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class Form_Login {
 
@@ -45,18 +45,14 @@ public class Form_Login {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Form_Login window = new Form_Login();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 
+	public void run() {
+		try {
+			Form_Login window = new Form_Login();
+			window.frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -71,6 +67,7 @@ public class Form_Login {
 	 */
 	private void initialize() {
 		frame = new JFrame("Concesionario Esteve");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/et.png"));
 		frame.setSize(330, 213);
 		frame.setResizable(false);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -124,26 +121,26 @@ public class Form_Login {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} 
+			}
 		});
-		
+
 		passwordField.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyChar()==KeyEvent.VK_ENTER) {
+				if (e.getKeyChar() == KeyEvent.VK_ENTER) {
 					try {
 						comprobarUsername();
 					} catch (IOException e1) {
@@ -151,10 +148,9 @@ public class Form_Login {
 						e1.printStackTrace();
 					}
 				}
-				
+
 			}
 		});
-		
 
 		GridBagConstraints gbc_button_entrar = new GridBagConstraints();
 		gbc_button_entrar.fill = GridBagConstraints.HORIZONTAL;
@@ -168,12 +164,12 @@ public class Form_Login {
 	public void comprobarUsername() throws IOException {
 		nom = textfield_login.getText();
 		pw = String.valueOf(passwordField.getPassword());
-		XMLConfig single = ConfigurationLoader.getInstance();		
+		XMLConfig single = ConfigurationLoader.getInstance();
 		usuarios = single.getUsers();
 		passwords = single.getPass();
 
 		/****** COMPRUEBA PRIMERO EL USERNAME ******/
-		for (int y = 0; y < usuarios.length; y++) { 
+		for (int y = 0; y < usuarios.length; y++) {
 			if (usuarios[y].equals(nom)) {
 				comprobarLogin(nom, pw, usuarios, passwords);
 				existe = true;
@@ -187,36 +183,88 @@ public class Form_Login {
 
 	}
 
-	/****** SI EXISTE EL USUARIO, COMPRUEBA LA CONTRASEÑA 
-	 * @throws IOException ******/
+	/******
+	 * SI EXISTE EL USUARIO, COMPRUEBA LA CONTRASEÑA
+	 * 
+	 * @throws IOException
+	 ******/
 	public void comprobarLogin(String nom, String pw, String[] usuarios, String[] passwords) throws IOException {
 		for (int i = 0; i < usuarios.length; i++) {
 			if (usuarios[i].equals(nom) && passwords[i].equals(pw)) {
 				correcto = true;
 				JOptionPane.showMessageDialog(null, "Bienvenido !", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-				
+
 				// Crear y escribir txt
+				String linea;
+				int nLineas = 1;
 				File archivo = new File("fs_employee.txt");
-				FileWriter fw = new FileWriter(archivo);
-				BufferedWriter bw = new BufferedWriter(fw);
-				PrintWriter pwr = new PrintWriter(bw);
-				pwr.write("DADES TEMPORALS");
-				pwr.write("Usuario: " + textfield_login.getText());
-				pwr.write("\r\n---------------------------------");
-				pwr.close();
-				bw.close();
-				
+				if (archivo.exists()) {
+					FileReader fr = new FileReader(archivo);
+					BufferedReader br = new BufferedReader(fr);
+					// si hay algo escrito salta el joptionpane
+					if ((linea = br.readLine()) != null) {
+						int res = JOptionPane.showConfirmDialog(null,
+								"Hay datos temporales, quieres cargarlos? En caso contrario seran eliminados",
+								"Atencion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+						// contador de lineas en el txt
+						while ((linea = br.readLine()) != null) {
+							nLineas++;
+						}
+
+						// abrir ventana donde se quedo
+						if (res == JOptionPane.YES_OPTION) {
+							if (nLineas == 2) {
+								Form_DatosClientes fdc = new Form_DatosClientes();
+								fdc.run();
+								break;
+							} else if (nLineas == 3) {
+								Form_Coches fmc = new Form_Coches();
+								fmc.run();
+								break;
+								// } else if (nLineas == 4) {
+								// Form_SubModelos fsm = new
+								// Form_SubModelos(mChoose);
+								// fsm.run(mChoose);
+								// break;
+								// } else {
+								// Form_ExtrasCoche fec = new
+								// Form_ExtrasCoche(modelo, smChoose,
+								// nombre_sm);
+								// fec.run(modelo, smChoose, nombre_sm);
+							}
+						} else {
+							FileWriter fw = new FileWriter(archivo);
+							BufferedWriter bw = new BufferedWriter(fw);
+							PrintWriter pwr = new PrintWriter(bw);
+							pwr.write("");
+							pwr.close();
+							bw.close();
+							JOptionPane.showMessageDialog(null, "Datos temporales eliminados");
+							textfield_login.setText("");
+							passwordField.setText("");
+							textfield_login.requestFocus();
+						}
+						break;
+					}
+					br.close();
+				}
+				FileWriter fw2 = new FileWriter(archivo);
+				BufferedWriter bw2 = new BufferedWriter(fw2);
+				PrintWriter pwr2 = new PrintWriter(bw2);
+				pwr2.write("DADES TEMPORALS\r\n");
+				pwr2.write("LOGIN - Usuario: " + textfield_login.getText() + "\r\n");
+				pwr2.close();
+				bw2.close();
+
 				Form_DatosClientes fdc = new Form_DatosClientes();
 				fdc.run();
 				break;
 			} else {
 				correcto = false;
-
 			}
 		}
 		if (correcto == false) {
-			JOptionPane.showMessageDialog(null, "Los datos no coinciden !", "Atencion",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Los datos no coinciden !", "Atencion", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

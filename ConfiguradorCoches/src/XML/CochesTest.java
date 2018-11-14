@@ -1,25 +1,31 @@
 package XML;
  
-import Idao.ICoches;
+import Idao.IAccesories;
+import Idao.IEngines;
+import Idao.IModels;
+import Idao.ISubmodels;
 
 public class CochesTest {
 
 	public static void main(String[] args) {
 
-		ICoches gestorCars = new Read_XMLCars();
+		IModels gestorM = new Read_XMLModels();
+		//IEngines gestorE = new Read_XMLEngines();
+		IAccesories gestorA = new Read_XMLAccesories();
+		ISubmodels gestorS = new Read_XMLSubmodels();
 
 		System.out.println("IMPRIMIMOS MODELOS");
-		gestorCars.getModelAll().forEach(System.out::println);
+		gestorM.getModelAll().forEach(System.out::println);
 		
 		
-		System.out.println("IMPRIMIMOS MOTORES");
-		gestorCars.getEngineAll().forEach(System.out::println);
+		//System.out.println("IMPRIMIMOS MOTORES");
+		//gestorE.getEngineAll().forEach(System.out::println);
 		
 		
 		System.out.println("IMPRIMIMOS ACCESORIOS");
-		gestorCars.getAccesoryAll().forEach(System.out::println);
+		gestorA.getAccesoryAll().forEach(System.out::println);
 		
 		System.out.println("IMPRIMIMOS SUBMODELOS");
-		gestorCars.getSubmodelAll().forEach(System.out::println);
+		gestorS.getSubmodelAll().forEach(System.out::println);
 	}
 }
