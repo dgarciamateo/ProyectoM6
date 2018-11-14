@@ -20,8 +20,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -126,6 +129,41 @@ public class Form_DatosClientes extends JFrame {
 							JOptionPane.WARNING_MESSAGE);
 				} else {
 					if (comrpobarEmail(txtCorreo.getText()) == true) {
+						File file = new File("fs_employee.txt");
+						if (file.exists()) {
+							FileWriter fw;
+							BufferedWriter bw;
+							try {
+								fw = new FileWriter(file.getAbsoluteFile(), true);
+								bw = new BufferedWriter(fw);
+								PrintWriter pwr = new PrintWriter(bw);
+								pwr.write("DATOS CLIENTE - Nombre: " + txtNombre.getText() + " --- "
+										+ "Primer apellido: " + txtApellido.getText() + " --- " + "Segundo apellido: "
+										+ txtApellido2.getText() + " --- " + "Direccion: " + txtDireccion.getText()
+										+ " --- " + "Correo electronico: " + txtCorreo.getText());
+								if (rbHombre.isSelected()) {
+									pwr.write(" --- " + "Genero: " + rbHombre.getText() + " --- ");
+								} else if (rbMujer.isSelected()) {
+									pwr.write(" --- " + "Genero: " + rbMujer.getText() + " --- ");
+								} else {
+									pwr.write(" --- " + "Genero: " + rbNo.getText() + " --- ");
+								}
+
+								try {
+									SimpleDateFormat geekonjavadate = new SimpleDateFormat("dd/MM/yyyy",
+											Locale.getDefault());
+									String gojdate = geekonjavadate.format(dateChooser.getDate());
+									pwr.write("Fecha de nacimiento: " + gojdate + "\r\n");
+								} catch (Exception e1) {
+									pwr.write("Fecha de nacimiento: \r\n");
+								}
+								pwr.close();
+								bw.close();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
 						JOptionPane.showMessageDialog(null, "Datos guardados.", "Mensaje",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
@@ -140,13 +178,37 @@ public class Form_DatosClientes extends JFrame {
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				int confirmed = JOptionPane.showConfirmDialog(null, "Desea salir sin guardar los datos ?",
-						"Confirmar salir", JOptionPane.YES_NO_OPTION);
 
-				if (confirmed == JOptionPane.YES_OPTION) {
-					dispose();
-				} else {
-					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+				String linea;
+				File archivo = new File("fs_employee.txt");
+				if (archivo.exists()) {
+					try {
+						FileReader fr2 = new FileReader(archivo);
+						BufferedReader br2 = new BufferedReader(fr2);
+						while ((linea = br2.readLine()) != null) {
+							String[] datos = linea.split(" ");
+							if (!datos[0].equals("DADES")) {
+								dispose();
+							}else if(!datos[0].equals("LOGIN")){
+								dispose();
+							} else {
+								int confirmed = JOptionPane.showConfirmDialog(null,
+										"Desea salir sin guardar los datos ?", "Confirmar salir",
+										JOptionPane.YES_NO_OPTION);
+
+								if (confirmed == JOptionPane.YES_OPTION) {
+									dispose();
+								}
+							}
+						}
+						br2.close();
+					} catch (FileNotFoundException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 				}
 			}
 		});
@@ -160,6 +222,37 @@ public class Form_DatosClientes extends JFrame {
 							JOptionPane.WARNING_MESSAGE);
 				} else {
 					if (comrpobarEmail(txtCorreo.getText()) == true) {
+						
+						String linea;
+						File archivo = new File("fs_employee.txt");
+						File archivo2 = new File("copia.txt");
+						if (archivo.exists()) {
+							try {
+								FileReader fr = new FileReader(archivo);
+								BufferedReader br = new BufferedReader(fr);
+								FileWriter fw = new FileWriter(archivo2);
+								BufferedWriter bw = new BufferedWriter(fw);
+								PrintWriter pwr = new PrintWriter(bw);
+								while ((linea = br.readLine()) != null) {
+									String[] datos = linea.split(" ");
+									if (!datos[0].equals("DATOS")) {
+										pwr.write(linea + "\r\n");
+									}
+								}
+								br.close();
+								pwr.close();
+							} catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						archivo.delete();
+						File renombre = new File("fs_employee.txt");
+						archivo2.renameTo(renombre);
+						
 						// txt
 						File file = new File("fs_employee.txt");
 						if (file.exists()) {
